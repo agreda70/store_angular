@@ -1,18 +1,19 @@
 import { Product } from './../interfaces/product.interface';
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent {
   @Input() product!: Product;
-  constructor() { }
+  @Output() addToCartClick = new EventEmitter<Product>();
 
-  ngOnInit(): void {
+  onClick(): void {
+    this.addToCartClick.emit(this.product);
   }
 
 }
 
-// Me quede en 1:39:00
